@@ -5,3 +5,31 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Cleaning database..."
+
+Restaurant.destroy_all
+
+puts "Creating new restaurants"
+
+50.times do
+
+  chefs = ["Gordon Ramsay", "Jamie Oliver", "Guido Caldara"]
+
+
+  attributes = {
+                name: Faker::Restaurant.name,
+                address: Faker::Address.street_address,
+                stars: rand(0..5),
+                chef_name: chefs.sample
+              }
+
+  new_restaurant = Restaurant.new(attributes)
+
+  new_restaurant.save!
+
+  puts "Creating another one"
+
+end
+
+puts "Finished seeding :)"
